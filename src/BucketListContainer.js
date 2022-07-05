@@ -45,7 +45,7 @@ const BucketListContainer = (props) => {
                   >
                     <FiTwitter color="#007E7E" />
                   </Button>
-                  <Button
+                  {/* <Button
                     m={2}
                     background="black"
                     onClick={() => {
@@ -53,7 +53,7 @@ const BucketListContainer = (props) => {
                     }}
                   >
                     <FiLinkedin color="#007E7E" />
-                  </Button>
+                  </Button> */}
                   {/* <Button
                     m={2}
                     background="black"
