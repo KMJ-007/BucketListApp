@@ -12,7 +12,7 @@
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-  <link rel="manifest" href="../src/manifest.webmanifest" />
+  <link rel="manifest" href="manifest.webmanifest" />
 
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -70,7 +70,6 @@
   const divInstall = document.getElementById('installContainer');
   const butInstall = document.getElementById('butInstall');
 
-  // it is needed because parcel will not recognize this as a file and not precess in its manner
   window.addEventListener('beforeinstallprompt', (event) => {
     // Prevent the mini-infobar from appearing on mobile.
     event.preventDefault();
