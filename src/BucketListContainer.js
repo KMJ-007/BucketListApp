@@ -49,7 +49,7 @@ const BucketListContainer = (props) => {
                     m={2}
                     background="black"
                     onClick={() => {
-                      window.location.href = `https://www.linkedin.com/shareArticle?mini=true&title=${data.Content}`;
+                      window.location.href = `https://www.linkedin.com/shareArticle?mini=true&url="https://cb.tezi.app/"&title=${data.Content}`;
                     }}
                   >
                     <FiLinkedin color="#007E7E" />
