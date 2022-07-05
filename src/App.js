@@ -4,7 +4,7 @@ import Home from "./Home";
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider w="100%" h="100%">
       <Home />
     </ChakraProvider>
   );

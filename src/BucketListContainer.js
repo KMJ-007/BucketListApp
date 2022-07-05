@@ -8,9 +8,16 @@ const BucketListContainer = (props) => {
     day: "numeric",
   };
   return (
-    <div>
+    <Box background="#15181E" color="white">
       {data[0].Date ? (
-        <Box p={3} m={4} borderWidth="1px" borderRadius="lg" overflow="hidden">
+        <Box
+          p={3}
+          m={4}
+          borderWidth="1px"
+          borderRadius="lg"
+          overflow="hidden"
+          mt={2}
+        >
           <Text>
             {new Date(data[0].Date).toLocaleDateString("en-US", options)}
           </Text>
@@ -30,7 +37,7 @@ const BucketListContainer = (props) => {
           })}
         </Box>
       ) : null}
-    </div>
+    </Box>
   );
 };
 

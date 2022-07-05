@@ -80,28 +80,36 @@ export default function Home() {
     });
   };
   return (
-    <Box>
+    <Box bg="#15181E" w="full" color="white">
       <Box
         display="flex"
-        w="100%"
+        w="full"
+        h="full"
         p={2}
-        bg="#4EC8C4"
+        bg="#040506"
+        color="white"
         justifyContent="space-around"
+        direction="column"
       >
         <Text mx={7} fontSize="2xl">
           My Content Bucket List
         </Text>
-        <Button onClick={onOpen}>
-          <AddIcon />
+        <Button onClick={onOpen} background="black">
+          <AddIcon color="#007E7E" />
         </Button>
       </Box>
-      {content ? <BucketList content={content} /> : null}
+      <Box h="100vh" background="#15181E" color="white" mt={2}>
+        {content ? <BucketList content={content} /> : null}
+      </Box>
+      {/* form */}
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
         <ModalContent h="80vh" w="100vw">
-          <ModalHeader>Add to Bucket list</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalHeader bg="#040506" color="white">
+            Add to Bucket list
+          </ModalHeader>
+          <ModalCloseButton color="#007E7E" />
+          <ModalBody pb={6} background="#15181E" color="white">
             <Formik
               initialValues={{ Date: new Date(), Content: "", image: "" }}
               onSubmit={(values, actions) => {
@@ -121,7 +129,7 @@ export default function Home() {
                         isInvalid={form.errors.name && form.touched.name}
                       >
                         <FormLabel htmlFor="Date">Date</FormLabel>
-                        <Input {...field} id="Date" type="date" />
+                        <Input {...field} id="Date" type="date" color="white" />
                         <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                       </FormControl>
                     )}
@@ -139,6 +147,7 @@ export default function Home() {
                   </Field>
                   {image ? (
                     <Image
+                      m={2}
                       boxSize="100px"
                       objectFit="cover"
                       src={image}
@@ -155,6 +164,7 @@ export default function Home() {
                       >
                         <FormLabel htmlFor="image">image</FormLabel>
                         <Input
+                          p={1}
                           {...field}
                           id="image"
                           type="file"
@@ -176,10 +186,10 @@ export default function Home() {
                   </Field>
                   <Button
                     mt={4}
-                    colorScheme="teal"
                     isLoading={props.isSubmitting}
                     type="submit"
                     onClick={onClose}
+                    color="#007E7E"
                   >
                     Submit
                   </Button>
@@ -187,7 +197,6 @@ export default function Home() {
               )}
             </Formik>
           </ModalBody>
-          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </Box>
