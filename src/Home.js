@@ -28,7 +28,7 @@ export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [image, setImage] = useState();
   const [content, setContent] = useState();
-
+  const [reload, updateState] = useState();
   useEffect(() => {
     const getData = async () => {
       if (!masterDB) {
@@ -69,7 +69,8 @@ export default function Home() {
       }
     };
     getData();
-  }, [masterDB]);
+  }, [masterDB, reload]);
+
   const handleSubmit = async (values) => {
     await masterDB.get("bucketList").then(async (doc) => {
       let tempData = doc.data;
@@ -77,6 +78,8 @@ export default function Home() {
       console.log(tempData);
       doc.data = tempData;
       await masterDB.put(doc);
+      setImage();
+      updateState({});
     });
   };
   return (
@@ -118,7 +121,6 @@ export default function Home() {
                   actions.setSubmitting(false);
                   handleSubmit(values);
                 }, 1000);
-                setImage();
               }}
             >
               {(props) => (
