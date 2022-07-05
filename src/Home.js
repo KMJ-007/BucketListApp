@@ -28,34 +28,50 @@ export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [image, setImage] = useState();
   const [content, setContent] = useState();
+
   useEffect(() => {
     const getData = async () => {
       if (!masterDB) {
         let tempMasterDB = await getMasterDB();
+        console.log("getting masterDB");
         setMasterDB(tempMasterDB);
       }
-
       if (masterDB) {
-        await masterDB.get("bcuketList").then((doc) => {
+        console.log("got masterdb");
+        await masterDB.allDocs().then(async (doc) => {
+          console.log(doc);
+          if (doc.total_rows == 0) {
+            await masterDB
+              .put({
+                _id: "bucketList",
+                data: [],
+              })
+              .then((data) => {
+                console.log(data);
+              });
+          }
+        });
+        await masterDB.get("bucketList").then((doc) => {
           let contentData = doc.data;
           console.log(contentData);
+          if (contentData) {
+            function groupBy(arr, key) {
+              return arr.reduce((acc, el) => {
+                acc[el[key]] = [...(acc[el[key]] || []), el];
+                return acc;
+              }, []);
+            }
 
-          function groupBy(arr, key) {
-            return arr.reduce((acc, el) => {
-              acc[el[key]] = [...(acc[el[key]] || []), el];
-              return acc;
-            }, []);
+            const result = groupBy(contentData, "Date");
+            setContent(result);
           }
-
-          const result = groupBy(contentData, "Date");
-          setContent(result);
         });
       }
     };
     getData();
   }, [masterDB]);
   const handleSubmit = async (values) => {
-    await masterDB.get("bcuketList").then(async (doc) => {
+    await masterDB.get("bucketList").then(async (doc) => {
       let tempData = doc.data;
       tempData.push(values);
       console.log(tempData);
