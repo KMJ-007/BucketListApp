@@ -78,7 +78,7 @@ export default function Home() {
       console.log(tempData);
       doc.data = tempData;
       await masterDB.put(doc);
-      setImage();
+      setImage("");
       updateState({});
     });
   };
@@ -102,7 +102,13 @@ export default function Home() {
         </Button>
       </Box>
       <Box h="100vh" background="#15181E" color="white" mt={2}>
-        {content ? <BucketList content={content} /> : null}
+        {content ? (
+          <BucketList content={content} />
+        ) : (
+          <Text fontSize="5xl" align="center">
+            Add new list to View here
+          </Text>
+        )}
       </Box>
       {/* form */}
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
